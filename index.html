@@ -20,8 +20,8 @@
 
     .eye-container {
       position: relative;
-      width: 500px; /* Göz boyutunu büyüttük ama aşırı büyütmedik */
-      height: 500px; /* Göz boyutunu büyüttük */
+      width: 600px; /* Göz boyutunu büyüttük */
+      height: 600px; /* Göz boyutunu büyüttük */
       background: url('eye2.jpg') no-repeat center;
       background-size: contain;
       border-radius: 50%;
@@ -31,8 +31,8 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 80px; /* Pupil boyutunu küçülttük */
-      height: 80px; /* Pupil boyutunu küçülttük */
+      width: 60px; /* Göz bebeği boyutunu küçülttük */
+      height: 60px; /* Göz bebeği boyutunu küçülttük */
       background: black;
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -58,7 +58,7 @@
       const dx = x - centerX;
       const dy = y - centerY;
       const angle = Math.atan2(dy, dx);
-      const dist = Math.min(rect.width / 4, Math.hypot(dx, dy)); // Göz içinde sınırlandırma
+      const dist = Math.min(rect.width / 8, Math.hypot(dx, dy)); // Hareket alanını yarıya düşürdük
 
       const moveX = Math.cos(angle) * dist;
       const moveY = Math.sin(angle) * dist;
