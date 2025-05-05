@@ -38,6 +38,17 @@
       transform: translate(-50%, -50%);
       box-shadow: 0 0 25px red;
       transition: transform 0.05s linear;
+      animation: pulse 3s infinite ease-in-out; /* Animasyon ekledik */
+    }
+
+    /* Pulse animasyonu */
+    @keyframes pulse {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
     }
   </style>
 </head>
@@ -58,7 +69,7 @@
       const dx = x - centerX;
       const dy = y - centerY;
       const angle = Math.atan2(dy, dx);
-      const dist = Math.min(rect.width / 8, Math.hypot(dx, dy)); // Hareket alanını yarıya düşürdük
+      const dist = Math.min(rect.width / 12, Math.hypot(dx, dy)); // Hareket alanını daha da küçülttük
 
       const moveX = Math.cos(angle) * dist;
       const moveY = Math.sin(angle) * dist;
