@@ -17,9 +17,9 @@
 
     .eye-container {
       position: relative;
-      width: 350px;
-      height: 350px;
-      background: url('eye2.jpg') no-repeat center;
+      width: 500px; /* Gözün boyutunu büyüttük */
+      height: 500px; /* Gözün boyutunu büyüttük */
+      background: url('eye.jpg') no-repeat center;
       background-size: contain;
     }
 
@@ -27,8 +27,8 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 40px;
-      height: 40px;
+      width: 80px; /* Pupil boyutunu büyüttük */
+      height: 80px; /* Pupil boyutunu büyüttük */
       background: black;
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -54,7 +54,7 @@
       const dx = x - centerX;
       const dy = y - centerY;
       const angle = Math.atan2(dy, dx);
-      const dist = Math.min(30, Math.hypot(dx, dy));
+      const dist = Math.min(100, Math.hypot(dx, dy)); /* Pupil'in hareket sınırını artırdık */
 
       const moveX = Math.cos(angle) * dist;
       const moveY = Math.sin(angle) * dist;
