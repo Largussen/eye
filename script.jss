@@ -1,29 +1,20 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+const iris = document.querySelector('.iris');
+const eye = document.querySelector('.eye');
+const eyeContainer = document.querySelector('.eye-container');
 
-.eye-container {
-    position: relative;
-    width: 100px;
-    height: 50px;
-}
+eyeContainer.addEventListener('mousemove', (event) => {
+    const eyeRect = eyeContainer.getBoundingClientRect(); // eyeContainer'ın pozisyonunu alıyoruz
+    const centerX = eyeRect.left + eyeRect.width / 2;
+    const centerY = eyeRect.top + eyeRect.height / 2;
 
-.eye {
-    width: 100%;
-    height: 100%;
-}
+    const mouseX = event.clientX;
+    const mouseY = event.clientY;
 
-.eye-white {
-    fill: white;
-}
+    const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
+    const distance = Math.min(eyeRect.width / 4, eyeRect.height / 4); // Iris hareket sınırı
 
-.iris {
-    fill: black;
-    transition: transform 0.1s ease-out;
-}
+    const irisX = distance * Math.cos(angle);
+    const irisY = distance * Math.sin(angle);
+
+    iris.style.transform = `translate(${irisX}px, ${irisY}px)`; // Iris'i doğru pozisyona taşıyoruz
+});
