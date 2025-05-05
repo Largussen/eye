@@ -1,69 +1,72 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Karanlık Bakış</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Karanlık Göz</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      background-color: black;
-      height: 100%;
+      background: black;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100vh;
     }
 
     .eye-container {
       position: relative;
       width: 350px;
       height: 350px;
-      background: url('eye2.jpg') no-repeat center;
-      background-size: cover;
-      border-radius: 50%;
-      box-shadow: 0 0 40px rgba(255, 0, 0, 0.4);
+      background: url('eye.jpg') no-repeat center;
+      background-size: contain;
     }
 
     .pupil {
       position: absolute;
-      top: 170px;
-      left: 170px;
+      top: 50%;
+      left: 50%;
       width: 40px;
       height: 40px;
-      background-color: black;
+      background: black;
       border-radius: 50%;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s ease;
-      box-shadow: 0 0 15px red;
+      box-shadow: 0 0 25px red;
+      transition: transform 0.05s linear;
     }
   </style>
 </head>
 <body>
   <div class="eye-container">
-    <div class="pupil"></div>
+    <div class="pupil" id="pupil"></div>
   </div>
 
   <script>
-    const pupil = document.querySelector('.pupil');
-    const eye = document.querySelector('.eye-container');
+    const pupil = document.getElementById("pupil");
+    const eye = document.querySelector(".eye-container");
 
-    document.addEventListener('mousemove', (e) => {
+    function updatePupil(x, y) {
       const rect = eye.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
 
-      const deltaX = e.clientX - centerX;
-      const deltaY = e.clientY - centerY;
+      const dx = x - centerX;
+      const dy = y - centerY;
+      const angle = Math.atan2(dy, dx);
+      const dist = Math.min(30, Math.hypot(dx, dy));
 
-      const angle = Math.atan2(deltaY, deltaX);
-      const maxDist = 30;
-
-      const moveX = Math.cos(angle) * maxDist;
-      const moveY = Math.sin(angle) * maxDist;
+      const moveX = Math.cos(angle) * dist;
+      const moveY = Math.sin(angle) * dist;
 
       pupil.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
+    }
+
+    document.addEventListener("mousemove", e => updatePupil(e.clientX, e.clientY));
+    document.addEventListener("touchmove", e => {
+      if (e.touches.length > 0) {
+        updatePupil(e.touches[0].clientX, e.touches[0].clientY);
+      }
     });
   </script>
 </body>
