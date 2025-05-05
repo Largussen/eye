@@ -14,25 +14,25 @@
       align-items: center;
       height: 100vh;
       display: flex;
-      flex-direction: column; /* Gözün ekranın tam ortasında olması için */
+      flex-direction: column;
       justify-content: center;
     }
 
     .eye-container {
       position: relative;
-      width: 600px; /* Göz boyutunu daha büyük yaptık */
-      height: 600px; /* Göz boyutunu daha büyük yaptık */
+      width: 600px;
+      height: 600px;
       background: url('eye2.jpg') no-repeat center;
       background-size: contain;
-      border-radius: 50%; /* Gözün yuvarlak olması için */
+      border-radius: 50%;
     }
 
     .pupil {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 120px; /* Pupil boyutunu büyüttük */
-      height: 120px; /* Pupil boyutunu büyüttük */
+      width: 120px;
+      height: 120px;
       background: black;
       border-radius: 50%;
       transform: translate(-50%, -50%);
@@ -58,7 +58,7 @@
       const dx = x - centerX;
       const dy = y - centerY;
       const angle = Math.atan2(dy, dx);
-      const dist = Math.min(rect.width / 4, Math.hypot(dx, dy)); /* Pupil'in göz içinde sınırlanması için */
+      const dist = Math.min(rect.width / 4, Math.hypot(dx, dy));
 
       const moveX = Math.cos(angle) * dist;
       const moveY = Math.sin(angle) * dist;
@@ -67,11 +67,23 @@
     }
 
     document.addEventListener("mousemove", e => updatePupil(e.clientX, e.clientY));
+
+    // Mobile: Parmağın hareketi ile gözbebeğini takip etme
     document.addEventListener("touchmove", e => {
       if (e.touches.length > 0) {
         updatePupil(e.touches[0].clientX, e.touches[0].clientY);
       }
     });
+
+    // Mobile: Parmağınızı kaldırdığınızda gözbebeğini ortalayın
+    document.addEventListener("touchend", () => {
+      const rect = eye.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      pupil.style.transform = `translate(-50%, -50%) translate(0px, 0px)`; // Başlangıç noktası
+    });
+
   </script>
 </body>
 </html>
