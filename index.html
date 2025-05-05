@@ -14,7 +14,6 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
-      justify-content: center;
       touch-action: none; /* Sayfa kaymasını engellemek için */
     }
 
@@ -37,18 +36,7 @@
       border-radius: 50%;
       transform: translate(-50%, -50%);
       box-shadow: 0 0 25px red;
-      transition: transform 0.1s linear; /* Hızlı geçişi düzelttik */
-      animation: pulse 5s infinite ease-in-out; /* Animasyon hızını düşürdük */
-    }
-
-    /* Pulse animasyonu */
-    @keyframes pulse {
-      0%, 100% {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.05); /* Daha küçük pulse */
-      }
+      transition: transform 0.1s linear; /* Hareketin düzgün olması için geçiş */
     }
   </style>
 </head>
@@ -78,9 +66,12 @@
       pupil.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
     }
 
-    document.addEventListener("mousemove", e => updatePupil(e.clientX, e.clientY));
+    // Fare hareketi ile takip etme
+    document.addEventListener("mousemove", e => {
+      updatePupil(e.clientX, e.clientY);
+    });
 
-    // Mobilde parmak hareketini takip etme
+    // Parmağı hareket ettirme
     document.addEventListener("touchmove", e => {
       e.preventDefault(); // Sayfanın sağa-sola kaymasını engelle
       if (e.touches.length > 0) {
