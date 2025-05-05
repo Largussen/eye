@@ -1,73 +1,19 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Karanlık Göz</title>
-  <style>
-    body {
-      margin: 0;
-      background: black;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .eye-container {
-      position: relative;
-      width: 350px;
-      height: 350px;
-      background: url('eye2.jpg') no-repeat center;
-      background-size: contain;
-    }
-
-    .pupil {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 40px;
-      height: 40px;
-      background: black;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      box-shadow: 0 0 25px red;
-      transition: transform 0.05s linear;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parmağı Takip Eden Göz</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="eye-container">
-    <div class="pupil" id="pupil"></div>
-  </div>
-
-  <script>
-    const pupil = document.getElementById("pupil");
-    const eye = document.querySelector(".eye-container");
-
-    function updatePupil(x, y) {
-      const rect = eye.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      const dx = x - centerX;
-      const dy = y - centerY;
-      const angle = Math.atan2(dy, dx);
-      const dist = Math.min(30, Math.hypot(dx, dy));
-
-      const moveX = Math.cos(angle) * dist;
-      const moveY = Math.sin(angle) * dist;
-
-      pupil.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
-    }
-
-    document.addEventListener("mousemove", e => updatePupil(e.clientX, e.clientY));
-    document.addEventListener("touchmove", e => {
-      if (e.touches.length > 0) {
-        updatePupil(e.touches[0].clientX, e.touches[0].clientY);
-      }
-    });
-  </script>
+    <div class="eye-container">
+        <svg class="eye" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="eye-white" cx="50" cy="25" rx="40" ry="20" />
+            <circle class="iris" cx="50" cy="25" r="8" />
+        </svg>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
