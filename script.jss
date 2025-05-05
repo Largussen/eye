@@ -1,20 +1,29 @@
-const iris = document.querySelector('.iris');
-const eye = document.querySelector('.eye');
-const eyeContainer = document.querySelector('.eye-container');
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-eyeContainer.addEventListener('mousemove', (event) => {
-    const eyeRect = eye.getBoundingClientRect();
-    const centerX = eyeRect.left + eyeRect.width / 2;
-    const centerY = eyeRect.top + eyeRect.height / 2;
+.eye-container {
+    position: relative;
+    width: 100px;
+    height: 50px;
+}
 
-    const mouseX = event.clientX;
-    const mouseY = event.clientY;
+.eye {
+    width: 100%;
+    height: 100%;
+}
 
-    const angle = Math.atan2(mouseY - centerY, mouseX - centerX);
-    const distance = Math.min(eyeRect.width / 4, eyeRect.height / 4); // Iris hareket sınırı
+.eye-white {
+    fill: white;
+}
 
-    const irisX = distance * Math.cos(angle);
-    const irisY = distance * Math.sin(angle);
-
-    iris.style.transform = `translate(${irisX}px, ${irisY}px)`;
-});
+.iris {
+    fill: black;
+    transition: transform 0.1s ease-out;
+}
