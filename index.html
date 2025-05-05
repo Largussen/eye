@@ -14,13 +14,13 @@
       align-items: center;
       height: 100vh;
       flex-direction: column;
-      touch-action: none; /* Sayfa kaymasını engellemek için */
+      touch-action: none; 
     }
 
     .eye-container {
       position: relative;
-      width: 600px; /* Göz boyutunu büyüttük */
-      height: 600px; /* Göz boyutunu büyüttük */
+      width: 600px; 
+      height: 600px; 
       background: url('eye2.jpg') no-repeat center;
       background-size: contain;
       border-radius: 50%;
@@ -30,13 +30,13 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 60px; /* Göz bebeği boyutunu küçülttük */
-      height: 60px; /* Göz bebeği boyutunu küçülttük */
+      width: 60px; 
+      height: 60px; 
       background: black;
       border-radius: 50%;
       transform: translate(-50%, -50%);
       box-shadow: 0 0 25px red;
-      transition: transform 0.1s linear; /* Hareketin düzgün olması için geçiş */
+      transition: transform 0.1s linear; 
     }
   </style>
 </head>
@@ -49,7 +49,7 @@
     const pupil = document.getElementById("pupil");
     const eye = document.querySelector(".eye-container");
 
-    // Göz bebeğinin hareket etme fonksiyonu
+  
     function updatePupil(x, y) {
       const rect = eye.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -58,7 +58,7 @@
       const dx = x - centerX;
       const dy = y - centerY;
       const angle = Math.atan2(dy, dx);
-      const dist = Math.min(rect.width / 12, Math.hypot(dx, dy)); // Hareket alanını daha da küçülttük
+      const dist = Math.min(rect.width / 12, Math.hypot(dx, dy)); 
 
       const moveX = Math.cos(angle) * dist;
       const moveY = Math.sin(angle) * dist;
@@ -71,21 +71,21 @@
       updatePupil(e.clientX, e.clientY);
     });
 
-    // Parmağı hareket ettirme
+    
     document.addEventListener("touchmove", e => {
-      e.preventDefault(); // Sayfanın sağa-sola kaymasını engelle
+      e.preventDefault(); 
       if (e.touches.length > 0) {
         updatePupil(e.touches[0].clientX, e.touches[0].clientY);
       }
     });
 
-    // Parmağınızı veya fareyi çektiğinizde gözbebeği ortada olacak
+    
     document.addEventListener("touchend", () => {
-      pupil.style.transform = `translate(-50%, -50%) translate(0px, 0px)`; // Başlangıç noktası
+      pupil.style.transform = `translate(-50%, -50%) translate(0px, 0px)`; 
     });
 
     document.addEventListener("mouseup", () => {
-      pupil.style.transform = `translate(-50%, -50%) translate(0px, 0px)`; // Fareyi bıraktığınızda
+      pupil.style.transform = `translate(-50%, -50%) translate(0px, 0px)`; 
     });
   </script>
 </body>
